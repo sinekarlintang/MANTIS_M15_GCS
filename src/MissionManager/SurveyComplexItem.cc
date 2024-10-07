@@ -869,7 +869,7 @@ void SurveyComplexItem::_rebuildTransectsPhase1WorkerSinglePolygon(bool refly)
         }
         transects[i] = transectVertices;
     }
-
+    bool turnLeft = true;
     // Convert to CoordInfo transects and append to _transects
     for (const QList<QGeoCoordinate>& transect : transects) {
         QGeoCoordinate                                  coord;
@@ -907,11 +907,30 @@ void SurveyComplexItem::_rebuildTransectsPhase1WorkerSinglePolygon(bool refly)
             TransectStyleComplexItem::CoordInfo_t coordInfo = { turnaroundCoord, CoordTypeTurnaround };
             coordInfoTransect.prepend(coordInfo);
 
+            // azimuth = transect.last().azimuthTo(transect[transect.count() - 2]);
+            // turnaroundCoord = transect.last().atDistanceAndAzimuth(-turnAroundDistance, azimuth);
+            // turnaroundCoord.setAltitude(qQNaN());
+            // coordInfo = { turnaroundCoord, CoordTypeTurnaround };
+            // coordInfoTransect.append(coordInfo);
+
             azimuth = transect.last().azimuthTo(transect[transect.count() - 2]);
-            turnaroundCoord = transect.last().atDistanceAndAzimuth(-turnAroundDistance, azimuth);
+            double turnAzimuth;
+            if (turnLeft) {
+                turnAzimuth = azimuth - 90.0;
+            } else {
+                turnAzimuth = azimuth + 90.0;
+            }
+            if (turnAzimuth >= 360.0) {
+                turnAzimuth -= 360.0;
+            } else if (turnAzimuth < 0.0) {
+                turnAzimuth += 360.0;
+            }
+            turnaroundCoord = transect.last().atDistanceAndAzimuth(turnAroundDistance / 2, turnAzimuth);
             turnaroundCoord.setAltitude(qQNaN());
             coordInfo = { turnaroundCoord, CoordTypeTurnaround };
             coordInfoTransect.append(coordInfo);
+            turnLeft = !turnLeft;
+
         }
 
         _transects.append(coordInfoTransect);

@@ -446,6 +446,11 @@ VisualMissionItem* MissionController::insertTakeoffItem(QGeoCoordinate /*coordin
 
     return _takeoffMissionItem;
 }
+VisualMissionItem* MissionController::insertVtolLandItem(QGeoCoordinate coordinate, int visualItemIndex, bool makeCurrentItem)
+{
+    VTOLLandingComplexItem* vtolLanding = qobject_cast<VTOLLandingComplexItem*>(insertComplexMissionItem(VTOLLandingComplexItem::name, coordinate, visualItemIndex, makeCurrentItem));
+    return vtolLanding;
+}
 
 VisualMissionItem* MissionController::insertLandItem(QGeoCoordinate coordinate, int visualItemIndex, bool makeCurrentItem)
 {
@@ -582,7 +587,7 @@ void MissionController::_insertComplexMissionItemWorker(const QGeoCoordinate& ma
     } else {
         _visualItems->insert(visualItemIndex, complexItem);
     }
-
+    // insertVtolTransitionItem(mapCenterCoordinate, -1, 1);
     //-- Keep track of bounding box changes in complex items
     if(!complexItem->isSimpleItem()) {
         connect(complexItem, &ComplexMissionItem::boundingCubeChanged, this, &MissionController::_complexBoundingBoxChanged);

@@ -22,8 +22,8 @@ void SurveyPlanCreator::createPlan(const QGeoCoordinate& mapCenterCoord)
 {
     _planMasterController->removeAll();
     _missionController->insertVtolTakeoffItem(mapCenterCoord, -1);
-    _missionController->insertVtolTransitionItem(mapCenterCoord, -1, 0);
-    _missionController->insertComplexMissionItem(SurveyComplexItem::name, mapCenterCoord, -1);
-    _missionController->insertLandItem(mapCenterCoord, -1);
+    _missionController->insertComplexMissionItem(SurveyComplexItem::name, mapCenterCoord, 1);
+    // _missionController->insertVtolTransitionItem(mapCenterCoord, 4, 1);
+    _missionController->insertVtolLandItem(mapCenterCoord, -1);
     _missionController->setCurrentPlanViewSeqNum(3, true);
 }
