@@ -27,9 +27,10 @@ message(Qt version $$[QT_VERSION])
 
 include(QGCCommon.pri)
 
-TARGET   = QGroundControl
+TARGET   = MantisGCS
 TEMPLATE = app
 QGCROOT  = $$PWD
+ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android
 
 QML_IMPORT_PATH += $$PWD/src/QmlControls
 
@@ -1456,3 +1457,4 @@ LinuxBuild {
 
     INSTALLS += target share_qgroundcontrol share_icons share_metainfo share_applications
 }
+android: include(C:/Users/HP/AppData/Local/Android/Sdk/android_openssl/openssl.pri)

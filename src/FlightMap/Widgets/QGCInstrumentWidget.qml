@@ -31,10 +31,11 @@ ColumnLayout {
 
     Rectangle {
         id:                 visualInstrument
-        height:             _outerRadius * 2
+        height:             parent.height
+        width:             parent.width
         Layout.fillWidth:   true
         radius:             _outerRadius
-        color:              qgcPal.window
+        color: Qt.rgba(0,0,0, 0)
 
         DeadMouseArea { anchors.fill: parent }
 
@@ -44,7 +45,7 @@ ColumnLayout {
             anchors.left:           parent.left
             size:                   _innerRadius * 2
             vehicle:                globals.activeVehicle
-            anchors.verticalCenter: parent.verticalCenter
+            anchors.top: parent.top
         }
 
         QGCCompassWidget {
@@ -53,11 +54,11 @@ ColumnLayout {
             anchors.left:           attitude.right
             size:                   _innerRadius * 2
             vehicle:                globals.activeVehicle
-            anchors.verticalCenter: parent.verticalCenter
+            anchors.top: parent.top
         }
     }
 
-    TerrainProgress {
-        Layout.fillWidth: true
-    }
+    // TerrainProgress {
+    //     Layout.fillWidth: true
+    // }
 }

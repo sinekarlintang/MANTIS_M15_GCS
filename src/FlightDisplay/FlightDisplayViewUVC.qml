@@ -51,7 +51,7 @@ Rectangle {
         visible:        QGroundControl.videoManager.isUvc
 
         onVisibleChanged: {
-            console.log('UVC Video output visible: ', visible);
+            // console.log('UVC Video output visible: ', visible);
             if (visible) {
                 camera.start()
             } else {

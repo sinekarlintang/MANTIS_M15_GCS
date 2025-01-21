@@ -24,6 +24,7 @@ Button {
     leftPadding:        _horizontalMargin
     rightPadding:       _horizontalMargin
     checkable:          false
+    QGCPalette { id: qgcPal }
 
     property bool logo: false
 

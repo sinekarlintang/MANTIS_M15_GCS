@@ -47,13 +47,15 @@ Rectangle {
         anchors.right:  parent.right
         anchors.bottom: parent.bottom
         height:         1
-        color:          "black"
+        color:          qgcPal.colorGreen
         visible:        qgcPal.globalTheme === QGCPalette.Light
+        // visible: false
     }
 
     Rectangle {
         anchors.fill:   viewButtonRow
-        visible:        currentToolbar === flyViewToolbar
+        visible:        currentToolbar === flyViewToolbar // MANTIS
+        // visible: false
 
         gradient: Gradient {
             orientation: Gradient.Horizontal
@@ -81,6 +83,7 @@ Rectangle {
         MainStatusIndicator {
             Layout.preferredHeight: viewButtonRow.height
             visible:                currentToolbar === flyViewToolbar
+            // visible: false
         }
 
         QGCButton {
@@ -88,6 +91,7 @@ Rectangle {
             text:               qsTr("Disconnect")
             onClicked:          _activeVehicle.closeVehicle()
             visible:            _activeVehicle && _communicationLost && currentToolbar === flyViewToolbar
+            // visible: false
         }
     }
 
@@ -121,6 +125,7 @@ Rectangle {
         anchors.bottom:         parent.bottom
         anchors.margins:        ScreenTools.defaultFontPixelHeight * 0.66
         visible:                currentToolbar !== planViewToolbar && _activeVehicle && !_communicationLost && x > (toolsFlickable.x + toolsFlickable.contentWidth + ScreenTools.defaultFontPixelWidth)
+        // visible: false
         fillMode:               Image.PreserveAspectFit
         source:                 _outdoorPalette ? _brandImageOutdoor : _brandImageIndoor
         mipmap:                 true
@@ -174,6 +179,7 @@ Rectangle {
         width:          _activeVehicle ? _activeVehicle.loadProgress * parent.width : 0
         color:          qgcPal.colorGreen
         visible:        !largeProgressBar.visible
+        // visible: false
     }
 
     // Large parameter download progress bar
@@ -185,6 +191,7 @@ Rectangle {
         height:         parent.height
         color:          qgcPal.window
         visible:        _showLargeProgress
+        // visible: false
 
         property bool _initialDownloadComplete: _activeVehicle ? _activeVehicle.initialConnectComplete : true
         property bool _userHide:                false

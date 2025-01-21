@@ -14,8 +14,8 @@ import QtQuick.Layouts  1.11
 import QtQuick.Window   2.11
 
 import QGroundControl               1.0
-import QGroundControl.Palette       1.0
 import QGroundControl.Controls      1.0
+import QGroundControl.Palette       1.0
 import QGroundControl.ScreenTools   1.0
 import QGroundControl.FlightDisplay 1.0
 import QGroundControl.FlightMap     1.0
@@ -89,6 +89,9 @@ ApplicationWindow {
 
         // Property to manage RemoteID quick acces to settings page
         property bool               commingFromRIDIndicator:        false
+        property bool               autoFlight:                     true
+        property string             tingkatAplikasi:                ""
+        property string                surveyArea:                  ""
     }
 
     /// Default color palette used throughout the UI
@@ -131,19 +134,19 @@ ApplicationWindow {
         toolDrawer.toolSource   = ""
         flightView.visible      = false
         planView.visible        = false
-        toolbar.currentToolbar  = currentToolbar
+        maintoolbar.currentToolbar  = currentToolbar
     }
 
     function showFlyView() {
         if (!flightView.visible) {
             mainWindow.showPreFlightChecklistIfNeeded()
         }
-        viewSwitch(toolbar.flyViewToolbar)
+        viewSwitch(maintoolbar.flyViewToolbar)
         flightView.visible = true
     }
 
     function showPlanView() {
-        viewSwitch(toolbar.planViewToolbar)
+        viewSwitch(maintoolbar.planViewToolbar)
         planView.visible = true
     }
 
@@ -258,18 +261,70 @@ ApplicationWindow {
         id:             rootBackground
         anchors.fill:   parent
     }
+    WelcomeScreen {
+        id:             welcomeScreen
+        anchors.fill:   parent
+        visible: !splashScreen.visible && globals.autoFlight
+    }
+    ModeScreen {
+        id:             modeScreen
+        anchors.fill:   parent
+        visible: !splashScreen.visible && !welcomeScreen.visible && globals.autoFlight
+    }
+    PlanScreen {
+        id:             planScreen
+        anchors.fill:   parent
+        visible: !splashScreen.visible && !welcomeScreen.visible && !modeScreen.visible && globals.autoFlight
+    }
+    FlightPlanScreen {
+        id:             flightplanScreen
+        anchors.fill:   parent
+        visible: !splashScreen.visible && !welcomeScreen.visible && !modeScreen.visible && !planScreen.visible && globals.autoFlight
+    }
+    FlightModeScreen {
+        id:             flightmodeScreen
+        anchors.fill:   parent
+        visible: !splashScreen.visible && !welcomeScreen.visible && !modeScreen.visible && !planScreen.visible && !flightplanScreen.visible && globals.autoFlight
+    }
+    ReadyFlightScreen {
+        id:             readyflightScreen
+        anchors.fill:   parent
+        visible: !splashScreen.visible && !welcomeScreen.visible && !modeScreen.visible && !planScreen.visible && !flightplanScreen.visible && !flightmodeScreen.visible && globals.autoFlight
+    }
+    RunningFlightScreen {
+        id:             runningflightScreen
+        anchors.fill:   parent
+        visible: !splashScreen.visible && !welcomeScreen.visible && !modeScreen.visible && !planScreen.visible && !flightplanScreen.visible && !flightmodeScreen.visible && !readyflightScreen.visible && globals.autoFlight
+    }
 
     //-------------------------------------------------------------------------
     /// Toolbar
-    header: MainToolBar {
+
+    ToolBar {
         id:         toolbar
         // height:     ScreenTools.toolbarHeight
-        height:     80
-        visible:    !(QGroundControl.videoManager.fullScreen && flightView.visible)
+        height:     40
+        // visible:    !(QGroundControl.videoManager.fullScreen && flightView.visible)
+        visible: !splashScreen.visible && globals.autoFlight
     }
+    MainToolBar {
+        id:         maintoolbar
+        // height:     ScreenTools.toolbarHeight
+        height:     80
+        visible:    !(QGroundControl.videoManager.fullScreen && flightView.visible) && !globals.autoFlight
+        // visible: !globals.autoFlight
+    }
+    header: globals.autoFlight ? toolbar : maintoolbar
 
-    footer: LogReplayStatusBar {
-        visible: QGroundControl.settingsManager.flyViewSettings.showLogReplayStatusBar.rawValue
+
+    // footer: LogReplayStatusBar {
+    //     visible: QGroundControl.settingsManager.flyViewSettings.showLogReplayStatusBar.rawValue
+    // }
+    footer: Footer {
+        id:             footer
+        anchors.bottom: parent.bottom
+        height:     30
+        visible: !splashScreen.visible
     }
 
     function showToolSelectDialog() {
@@ -430,12 +485,18 @@ ApplicationWindow {
     FlyView {
         id:             flightView
         anchors.fill:   parent
+        visible: !globals.autoFlight
+    }
+
+    SplashScreen {
+        id: splashScreen
+        anchors.fill:   parent
     }
 
     PlanView {
         id:             planView
         anchors.fill:   parent
-        visible:        false
+        visible: false
     }
 
     Drawer {

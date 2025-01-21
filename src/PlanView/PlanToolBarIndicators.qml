@@ -1,20 +1,26 @@
 import QtQuick          2.3
 import QtQuick.Controls 1.2
-import QtQuick.Layouts  1.2
 import QtQuick.Dialogs  1.2
+import QtLocation       5.3
+import QtPositioning    5.3
+import QtQuick.Layouts  1.2
+import QtQuick.Window   2.2
 
 import QGroundControl                   1.0
+import QGroundControl.FlightMap         1.0
 import QGroundControl.ScreenTools       1.0
 import QGroundControl.Controls          1.0
+import QGroundControl.FactSystem        1.0
 import QGroundControl.FactControls      1.0
 import QGroundControl.Palette           1.0
-
+import QGroundControl.Controllers       1.0
+import QGroundControl.ShapeFileHelper   1.0
 // Toolbar for Plan View
 Item {
     width: missionStats.width + _margins
 
-    property var    _planMasterController:      globals.planMasterControllerPlanView
-    property var    _currentMissionItem:        globals.currentPlanMissionItem          ///< Mission item to display status for
+    property var    _planMasterController:      null
+    property var    _currentMissionItem:        null          ///< Mission item to display status for
 
     property var    missionItems:               _controllerValid ? _planMasterController.missionController.visualItems : undefined
     property real   missionDistance:            _controllerValid ? _planMasterController.missionController.missionDistance : NaN
@@ -84,6 +90,7 @@ Item {
         }
         return complete
     }
+    QGCPalette { id: qgcPal }
 
     // Progress bar
     Connections {
@@ -135,7 +142,7 @@ Item {
             Layout.alignment:       Qt.AlignVCenter | Qt.AlignHCenter
 
             QGCLabel {
-                text:               qsTr("Selected Waypoint")
+                text:               qsTr("Selected Waypoints")
                 Layout.columnSpan:  8
                 font.pointSize:     ScreenTools.smallFontPointSize
             }
@@ -285,7 +292,7 @@ Item {
         anchors.left:   parent.left
         anchors.right:  parent.right
         height:         parent.height
-        color:          qgcPal.window
+        color:          qgcPal.colorGreen
         visible:        _showLargeProgress
 
         property bool _userHide:                false

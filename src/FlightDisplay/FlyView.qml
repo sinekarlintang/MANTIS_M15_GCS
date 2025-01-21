@@ -50,6 +50,7 @@ Item {
     property var    _guidedController:      guidedActionsController
     property var    _guidedActionList:      guidedActionList
     property var    _guidedValueSlider:     guidedValueSlider
+    property var    _guidedActionConfirm:     guidedActionConfirm
     property var    _widgetLayer:           widgetLayer
     property real   _toolsMargin:           ScreenTools.defaultFontPixelWidth * 0.75
     property rect   _centerViewport:        Qt.rect(0, 0, width, height)
@@ -96,27 +97,28 @@ Item {
     }
 
     // Development tool for visualizing the insets for a paticular layer, enable if needed
-    /*
-    FlyViewInsetViewer {
-        id:                     widgetLayerInsetViewer
-        anchors.top:            parent.top
-        anchors.bottom:         parent.bottom
-        anchors.left:           parent.left
-        anchors.right:          guidedValueSlider.visible ? guidedValueSlider.left : parent.right
 
-        z:                      widgetLayer.z + 1
+    // FlyViewInsetViewer {
+    //     id:                     widgetLayerInsetViewer
+    //     anchors.top:            parent.top
+    //     anchors.bottom:         parent.bottom
+    //     anchors.left:           parent.left
+    //     anchors.right:          guidedValueSlider.visible ? guidedValueSlider.left : parent.right
 
-        insetsToView:           customOverlay.totalToolInsets
-    }*/
+    //     z:                      widgetLayer.z + 1
+
+    //     insetsToView:           customOverlay.totalToolInsets
+    // }
 
     GuidedActionsController {
         id:                 guidedActionsController
         missionController:  _missionController
         actionList:         _guidedActionList
         guidedValueSlider:     _guidedValueSlider
+        confirmDialog: _guidedActionConfirm
     }
 
-    /*GuidedActionConfirm {
+    GuidedActionConfirm {
         id:                         guidedActionConfirm
         anchors.margins:            _margins
         anchors.bottom:             parent.bottom
@@ -124,7 +126,7 @@ Item {
         z:                          QGroundControl.zOrderTopMost
         guidedController:           _guidedController
         guidedValueSlider:             _guidedValueSlider
-    }*/
+    }
 
     GuidedActionList {
         id:                         guidedActionList

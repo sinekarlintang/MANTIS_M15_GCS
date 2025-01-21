@@ -2271,6 +2271,31 @@ void Vehicle::setFlightMode(const QString& flightMode)
         // states.
         newBaseMode |= base_mode;
 
+        // // Check if the new flight mode is Quadplane Agri (mode index 26)
+        // if (custom_mode == 26) {
+        //     // Send MAV_CMD_DEBIT_DOSAGE_SPRAY command when switching to Quadplane Agri mode
+        //     mavlink_message_t msg;
+        //     uint8_t target_system = id(); // Vehicle system ID
+        //     uint8_t target_component = defaultComponentId(); // Target component ID
+
+        //     // Parameters for MAV_CMD_DEBIT_DOSAGE_SPRAY
+        //     float param1 = 1; // Debit mode (set to 1 for debit, 0 for dosage)
+        //     float param2 = 0.0f; // Initial value for debit (customize as needed)
+
+        //     // Pack the MAVLink command message
+        //     mavlink_msg_command_long_pack_chan(_mavlink->getSystemId(),
+        //                                        _mavlink->getComponentId(),
+        //                                        sharedLink->mavlinkChannel(),
+        //                                        &msg,
+        //                                        target_system,
+        //                                        target_component,
+        //                                        MAV_CMD_DEBIT_DOSAGE_SPRAY,  // Your custom command
+        //                                        0,                           // Confirmation
+        //                                        param1, param2, 0, 0, 0, 0, 0);
+
+        //     // Send the message
+        //     sendMessageOnLinkThreadSafe(sharedLink.get(), msg);
+        // }
         if (_firmwarePlugin->MAV_CMD_DO_SET_MODE_is_supported()) {
             sendMavCommand(defaultComponentId(),
                            MAV_CMD_DO_SET_MODE,

@@ -178,7 +178,9 @@ Item {
         _circleMode = _savedCircleMode
     }
 
-    onInteractiveChanged: _handleInteractiveChanged()
+    onInteractiveChanged: {
+        _handleInteractiveChanged()
+    }
 
     on_CircleModeChanged: {
         if (_circleMode) {
@@ -204,6 +206,7 @@ Item {
     Component.onCompleted: {
         addCommonVisuals()
         _handleInteractiveChanged()
+
     }
     Component.onDestruction: mapPolygon.traceMode = false
 
@@ -525,12 +528,12 @@ Item {
             y:                              mapControl.centerViewport.top
             availableWidth:                 mapControl.centerViewport.width
 
-            QGCButton {
-                _horizontalPadding: 0
-                text:               qsTr("Basic")
-                visible:            !mapPolygon.traceMode
-                onClicked:          _resetPolygon()
-            }
+            // QGCButton {
+            //     _horizontalPadding: 0
+            //     text:               qsTr("Basic")
+            //     visible:            !mapPolygon.traceMode
+            //     onClicked:          _resetPolygon()
+            // }
 
             QGCButton {
                 _horizontalPadding: 0
@@ -557,12 +560,12 @@ Item {
                 }
             }
 
-            QGCButton {
-                _horizontalPadding: 0
-                text:               qsTr("Load KML/SHP...")
-                onClicked:          kmlOrSHPLoadDialog.openForLoad()
-                visible:            !mapPolygon.traceMode
-            }
+            // QGCButton {
+            //     _horizontalPadding: 0
+            //     text:               qsTr("Load KML/SHP...")
+            //     onClicked:          kmlOrSHPLoadDialog.openForLoad()
+            //     visible:            !mapPolygon.traceMode
+            // }
         }
     }
 

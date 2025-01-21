@@ -112,32 +112,32 @@ Column {
         }
     } // Column - Camera spec based ui
 
-    // No camera spec ui
-    GridLayout {
-        anchors.left:   parent.left
-        anchors.right:  parent.right
-        columnSpacing:  _margin
-        rowSpacing:     _margin
-        columns:        2
-        visible:        cameraCalc.isManualCamera
+    // // No camera spec ui
+    // GridLayout {
+    //     anchors.left:   parent.left
+    //     anchors.right:  parent.right
+    //     columnSpacing:  _margin
+    //     rowSpacing:     _margin
+    //     columns:        2
+    //     visible:        cameraCalc.isManualCamera
 
-        QGCLabel { text: distanceToSurfaceLabel }
-        AltitudeFactTextField {
-            fact:                       cameraCalc.distanceToSurface
-            altitudeMode:               cameraCalc.distanceMode
-            Layout.fillWidth:           true
-        }
+    //     QGCLabel { text: distanceToSurfaceLabel }
+    //     AltitudeFactTextField {
+    //         fact:                       cameraCalc.distanceToSurface
+    //         altitudeMode:               cameraCalc.distanceMode
+    //         Layout.fillWidth:           true
+    //     }
 
-        QGCLabel { text: frontalDistanceLabel }
-        FactTextField {
-            Layout.fillWidth:   true
-            fact:               cameraCalc.adjustedFootprintFrontal
-        }
+    //     QGCLabel { text: frontalDistanceLabel }
+    //     FactTextField {
+    //         Layout.fillWidth:   true
+    //         fact:               cameraCalc.adjustedFootprintFrontal
+    //     }
 
-        QGCLabel { text: sideDistanceLabel }
-        FactTextField {
-            Layout.fillWidth:   true
-            fact:               cameraCalc.adjustedFootprintSide
-        }
-    } // GridLayout
+    //     QGCLabel { text: sideDistanceLabel }
+    //     FactTextField {
+    //         Layout.fillWidth:   true
+    //         fact:               cameraCalc.adjustedFootprintSide
+    //     }
+    // } // GridLayout
 } // Column

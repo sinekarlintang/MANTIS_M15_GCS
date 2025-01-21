@@ -393,8 +393,8 @@ FlightMap {
         sourceItem: Image {
             id: find_emt
             source: "/qmlimages/findsignal.svg"
-            sourceSize.width: width/5
-            sourceSize.height: height/5
+            sourceSize.width: 50/5
+            sourceSize.height: 50/5
             fillMode: Image.PreserveAspectFit
             Rectangle{
                 id : emt100Frame
@@ -408,11 +408,10 @@ FlightMap {
                     font.pointSize: 12
                     horizontalAlignment: Text.AlignHCenter
                     verticalAlignment: Text.AlignVCenter
-                    anchors.verticalCenter: parent.verticalCenter/2
+                    anchors.verticalCenter: parent.verticalCenter
                     anchors.horizontalCenter: parent.horizontalCenter
                 }
             }
-
         }
 
         property bool inGotoFlightMode: _activeVehicle ? _activeVehicle.flightMode === _activeVehicle.gotoFlightMode : false
@@ -461,8 +460,8 @@ FlightMap {
         sourceItem: Image {
             id: gotoLocationImage
             source: "/qmlimages/findsignal.svg"
-            sourceSize.width: width/5
-            sourceSize.height: height/5
+            sourceSize.width: 50/5
+            sourceSize.height: 50/5
             fillMode: Image.PreserveAspectFit
             Rectangle{
                 id : gotoLocationFrame
@@ -476,7 +475,7 @@ FlightMap {
                     font.pointSize: 12
                     horizontalAlignment: Text.AlignHCenter
                     verticalAlignment: Text.AlignVCenter
-                    anchors.verticalCenter: parent.verticalCenter/2
+                    anchors.verticalCenter: parent.verticalCenter
                     anchors.horizontalCenter: parent.horizontalCenter
                 }
             }

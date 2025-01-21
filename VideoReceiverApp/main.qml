@@ -4,7 +4,7 @@ import QtQuick.Layouts 1.3
 import org.freedesktop.gstreamer.GLVideoItem 1.0
 
 Window {
-    visible: true
+    visible: false //MANTIS
     width: 640
     height: 480
     title: qsTr("VideoReceiverApp")

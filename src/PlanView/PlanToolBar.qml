@@ -14,6 +14,8 @@ Rectangle {
     id:                 _root
     color:              qgcPal.globalTheme === QGCPalette.Light ? Qt.rgba(1,1,1,0.8) : Qt.rgba(0,0,0,0.75)
     anchors.fill:       parent
+    QGCPalette { id: qgcPal }
+
     /// Bottom single pixel divider
     Rectangle {
         anchors.left:   parent.left

@@ -1242,6 +1242,27 @@
             }
         },
         { "id": 30001, "rawName": "MAV_CMD_PAYLOAD_PREPARE_DEPLOY", "friendlyName": "Payload prepare deploy" },
-        { "id": 30002, "rawName": "MAV_CMD_PAYLOAD_CONTROL_DEPLOY", "friendlyName": "Payload control deploy" }
+        { "id": 30002, "rawName": "MAV_CMD_PAYLOAD_CONTROL_DEPLOY", "friendlyName": "Payload control deploy" },
+        {
+            "id": 31010,
+            "rawName": "MAV_CMD_DEBIT_DOSAGE_SPRAY",
+            "friendlyName": "Set Debit or Dosage for Spray",
+            "description": "Custom command to set spraying debit or dosage.",
+            "category": "Custom",
+            "param1": {
+                "label": "Mode",
+                "enumStrings": "Debit,Dosage",
+                "enumValues": "1,0",
+                "default": 1
+            },
+            "param2": {
+                "label": "Value",
+                "default": 0.0,
+                "units": "ml/s",
+                "decimalPlaces": 2,
+                "min": 0,
+                "max": 100
+            }
+        }
     ]
 }

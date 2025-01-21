@@ -93,9 +93,13 @@ void QGCPalette::_buildMap()
     // Colors not affecting by theming or enable/disable
     DECLARE_QGC_SINGLE_COLOR(mapWidgetBorderLight,          "#ffffff")
     DECLARE_QGC_SINGLE_COLOR(mapWidgetBorderDark,           "#000000")
-    DECLARE_QGC_SINGLE_COLOR(mapMissionTrajectory,          "#be781c")
+    DECLARE_QGC_SINGLE_COLOR(mapMissionTrajectory,          "#BF911D")
     DECLARE_QGC_SINGLE_COLOR(surveyPolygonInterior,         "green")
     DECLARE_QGC_SINGLE_COLOR(surveyPolygonTerrainCollision, "red")
+
+    DECLARE_QGC_SINGLE_COLOR(mantisMediumGrey, "#343434")
+    DECLARE_QGC_SINGLE_COLOR(mantisLightGrey, "#4b4b4b")
+
 }
 
 void QGCPalette::setColorGroupEnabled(bool enabled)
